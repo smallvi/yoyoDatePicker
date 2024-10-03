@@ -280,8 +280,8 @@ export function yoyoDatePicker(selector, options = {}) {
     if (!inline) {
         inputElement.addEventListener('click', () => {
             const rect = inputElement.getBoundingClientRect();
-            datepickerContainer.style.top = `${rect.bottom}px`;
-            datepickerContainer.style.left = `${rect.left}px`;
+            datepickerContainer.style.top = `${rect.bottom + window.scrollY}px`;
+            datepickerContainer.style.left = `${rect.left + window.scrollX}px`;
             datepickerContainer.style.display = 'flex';
         });
 
