@@ -11,7 +11,6 @@ export function yoyoDatePicker(selector, options = {}) {
 
     const enableDates = options.enableDates || [];
     const disableDates = options.disableDates || [];
-    const firstDayOfWeek = options.firstDayOfWeek || 'Monday';
     const disableDateStyle = options.disableDateStyle || '';
     const enableDateStyle = options.enableDateStyle || '';
     const todayStyle = options.todayStyle || 'font-weight: bold;';
@@ -20,10 +19,7 @@ export function yoyoDatePicker(selector, options = {}) {
     const width = options.width || '350px';
     const primaryColor = options.primaryColor || '#4a90e2';
     const buttonHoverColor = options.buttonHoverColor || '#3a7bc8';
-    let weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    if (firstDayOfWeek === 'Sunday') {
-        weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    }
+    let weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; // 默认星期天为第一天
     let currentDate = new Date();
     const today = new Date();
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -173,7 +169,6 @@ export function yoyoDatePicker(selector, options = {}) {
         updateCalendar();
     }
 
-    // 显示星期一到星期日
     function displayWeekDays() {
         daysNamesContainer.innerHTML = '';
         weekDays.forEach(day => {
@@ -191,19 +186,12 @@ export function yoyoDatePicker(selector, options = {}) {
         yearInput.value = year;
         monthSelect.value = month;
 
-        // 获取当月的天数
         const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-        // 获取当月第一天是星期几
         let firstDay = new Date(year, month, 1).getDay();
-        if (firstDayOfWeek === 'Monday') {
-            firstDay = (firstDay === 0) ? 7 : firstDay;
-        }
+        firstDay = (firstDay === 0) ? 7 : firstDay; // 如果是星期天，转换为7
 
-        // 清空之前的天数
         daysContainer.innerHTML = '';
 
-        // 填充空白天数
         for (let i = 0; i < firstDay; i++) {
             const emptyDay = document.createElement('button');
             emptyDay.classList.add('yoyo_dp_day');
@@ -211,13 +199,11 @@ export function yoyoDatePicker(selector, options = {}) {
             daysContainer.appendChild(emptyDay);
         }
 
-        // 填充当月的天数
         for (let day = 1; day <= daysInMonth; day++) {
             const dayElement = document.createElement('button');
             dayElement.classList.add('yoyo_dp_day');
             const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 
-            // 检查日期是否被禁用
             if (disableDates.includes(dateStr)) {
                 dayElement.classList.add('yoyo_dp_disabled');
                 dayElement.disabled = true;
@@ -237,12 +223,10 @@ export function yoyoDatePicker(selector, options = {}) {
                 dayElement.disabled = true;
             }
 
-            // 检查是否是今天
             if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
                 dayElement.classList.add('yoyo_dp_today');
             }
 
-            // 检查是否是选中的日期
             if (dateStr === selectedDate) {
                 dayElement.classList.add('yoyo_dp_selected');
             }

@@ -9,30 +9,44 @@
 
 <body>
     <div style="margin-bottom: 100px;">
-        <input id="yoyo_datepicker1" type="text"  class="yyy">
+        <input id="yoyo_datepicker1" type="text">
     </div>
-    
 
-    <input id="yoyo_datepicker2" type="text" class="yyy">
+
+    <input id="yoyo_datepicker2" type="text">
     <script src="./dist/yoyoDatePicker.min.js"></script>
     <script>
 
-document.addEventListener('DOMContentLoaded', () => {
-    yoyoDatePicker('.yyy', {
-            enableDates: ['2024-10-01', '2024-10-02', '2024-10-07', '2024-10-27'],
-            // disableDates: ['2024-09-15', '2024-09-16'],
-            firstDayOfWeek: 'Sunday',
-            disableDateStyle: 'background-color: #f0f0f0; color: #a0a0a0; font-size: 14px;',
-            enableDateStyle: 'background-color: #e8f0fe; color: #4a90e2; font-size: 14px;',
-            todayStyle: 'font-weight: bold; border: 3px solid #4a90e2;',
-            primaryColor: '#4a90e2',
-            inline: true,
-            width: '350px',
-            onSelect: function (date) {
-                console.log('Selected date:', date);
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            yoyoDatePicker('#yoyo_datepicker1', {
+                enableDates: ['2024-10-01', '2024-10-02', '2024-10-07', '2024-10-27'],
+                // disableDates: ['2024-09-15', '2024-09-16'],
+                disableDateStyle: 'background-color: #f0f0f0; color: #a0a0a0; font-size: 14px;',
+                enableDateStyle: 'background-color: #e8f0fe; color: #4a90e2; font-size: 14px;',
+                todayStyle: 'font-weight: bold; border: 3px solid #4a90e2;',
+                primaryColor: '#4a90e2',
+                inline: false,
+                width: '350px',
+                onSelect: function (date) {
+                    console.log('Selected date:', date);
+                }
+            });
+
+            yoyoDatePicker('#yoyo_datepicker2', {
+                enableDates: ['2024-10-01', '2024-10-02', '2024-10-07', '2024-10-27'],
+                // disableDates: ['2024-09-15', '2024-09-16'],
+                firstDayOfWeek: 'Monday',
+                disableDateStyle: 'background-color: #f0f0f0; color: #a0a0a0; font-size: 14px;',
+                enableDateStyle: 'background-color: #e8f0fe; color: #4a90e2; font-size: 14px;',
+                todayStyle: 'font-weight: bold; border: 3px solid #4a90e2;',
+                primaryColor: '#4a90e2',
+                inline: false,
+                width: '350px',
+                onSelect: function (date) {
+                    console.log('Selected date:', date);
+                }
+            });
         });
-});
 
     </script>
 </body>
